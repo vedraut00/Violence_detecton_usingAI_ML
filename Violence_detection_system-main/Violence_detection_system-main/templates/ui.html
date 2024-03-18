@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Video</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>
+        body {
+            color: white;
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, sans-serif;
+            overflow: hidden; /* Hide the overflow to prevent scroll bars */
+        }
+
+        /* Set the video as the background */
+        video.video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1; /* Place the video behind other content */
+        }
+
+        .features {
+            width: 900px;
+            height: 700px;
+            border-radius: 35px;
+            object-fit: contain;
+            margin: 20px auto;
+        }
+
+        section.col-sm {
+            width: 1000px;
+            height: 650px;
+            border-radius: 35px; /* Apply rounded corners */
+            object-fit: contain;
+            margin: 20px auto 40px auto; /* Move center element up */
+            text-align: center;
+            padding: 20px;
+            position: relative; /* Make it relative to position the loading text and circle */
+        }
+
+        .loading-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent; /* Remove the background color */
+            z-index: 1; /* Place it above the background video */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-text {
+            font-size: 28px; /* Increased font size */
+            color: white;
+            padding: 10px 20px; /* Adjusted padding */
+            border-radius: 5px; /* Rounded corners for text */
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+        }
+
+        /* New Loading Animation Styles */
+        .container {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: transparent; /* Remove background color */
+        }
+
+        .loader {
+            max-width: 15rem;
+            width: 100%;
+            height: auto;
+            stroke-linecap: round;
+        }
+
+        circle {
+            fill: none;
+            stroke-width: 3.5;
+            -webkit-animation-name: preloader;
+            animation-name: preloader;
+            -webkit-animation-duration: 3s;
+            animation-duration: 3s;
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+            -webkit-animation-timing-function: ease-in-out;
+            animation-timing-function: ease-in-out;
+            -webkit-transform-origin: 170px 170px;
+            transform-origin: 170px 170px;
+            will-change: transform;
+        }
+
+        circle:nth-of-type(1) {
+            stroke-dasharray: 550;
+            stroke: grey; /* Grey color */
+        }
+
+        circle:nth-of-type(2) {
+            stroke-dasharray: 500;
+            stroke: red; /* Red color */
+        }
+
+        circle:nth-of-type(3) {
+            stroke-dasharray: 450;
+            stroke: grey; /* Grey color */
+        }
+
+        circle:nth-of-type(4) {
+            stroke-dasharray: 300;
+            stroke: red; /* Red color */
+        }
+
+        circle:nth-of-type(1) {
+            -webkit-animation-delay: -0.15s;
+            animation-delay: -0.15s;
+        }
+
+        circle:nth-of-type(2) {
+            -webkit-animation-delay: -0.3s;
+            animation-delay: -0.3s;
+        }
+
+        circle:nth-of-type(3) {
+            -webkit-animation-delay: -0.45s;
+            -moz-animation-delay: -0.45s;
+            animation-delay: -0.45s;
+        }
+
+        circle:nth-of-type(4) {
+            -webkit-animation-delay: -0.6s;
+            -moz-animation-delay: -0.6s;
+            animation-delay: -0.6s;
+        }
+
+        @-webkit-keyframes preloader {
+            50% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes preloader {
+            50% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        img {
+            width: 100%;
+            max-height: 600px;
+            border-radius: 15px;
+            object-fit: contain;
+            margin-top: 20px;
+        }
+
+        /* Adjust the position of the button to the bottom right */
+        .back-button {
+            background-color: rgba(70, 69, 69, 0.603);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            position: fixed;
+            bottom: 20px; /* Adjust the bottom position */
+            right: 20px; /* Adjust the right position */
+            z-index: 2; /* Set a higher z-index to place it in front */
+        }
+
+        .back-button:hover {
+            background-color: rgba(206, 206, 206, 0.65);
+            color: white; /* Set the text color to white on hover */
+        }
+    </style>
+</head>
+<body>
+<video autoplay muted loop id="video-bg" class="video-background">
+    <source src="{{ url_for('static', filename='images/UI3.mp4') }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<section class="col-sm">
+    <div class="loading-bg" id="loading-bg">
+        <div class="container">
+            <svg class="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
+                <circle cx="170" cy="170" r="160" stroke="#E2007C"/>
+                <circle cx="170" cy="170" r="135" stroke="#404041"/>
+                <circle cx="170" cy="170" r="110" stroke="#E2007C"/>
+                <circle cx="170" cy="170" r="85" stroke="#404041"/>
+            </svg>
+        </div>
+    </div>
+    <a href="http://127.0.0.1:5000/" class="back-button">Return to Homepage</a>
+    <img src="{{ url_for('webapp') }}" alt="Uploaded video" onload="hideLoading()">
+</section>
+
+<script>
+    function hideLoading() {
+        var loadingBg = document.getElementById('loading-bg');
+        loadingBg.style.display = 'none'; // Hide the loading element
+    }
+</script>
+</body>
+</html>

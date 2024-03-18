@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ObjectDetection-YOLOv8</title>
+    <style>
+        body {
+            font-family: Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header.feature-box.below {
+            height: 800px;
+            margin-top: -30px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        ul.centered {
+            list-style: none;
+            padding: 0;
+            position: absolute;
+            bottom: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        ul.centered li {
+            margin: 0 10px;
+        }
+
+        ul.centered a {
+            display: inline-block;
+            padding: 10px 30px;
+            font-size: 18px;
+            background-color: rgba(70, 69, 69, 0.603);
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            transition: background-color 0.6s, color 0.6s, box-shadow 0.3s; /* Add box-shadow transition */
+
+            /* Add drop shadow */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adjust values as needed */
+        }
+
+        ul.centered a:hover {
+            background-color: rgba(206, 206, 206, 0.65);
+            color: white;
+
+            /* Increase shadow on hover for a lift effect */
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Adjust values as needed */
+        }
+
+        .tcl-homepage-hero__heading {
+            font-size: var(--tcl-homepage-hero-heading-font-size-desktop);
+            color: #f0f0f0af; /* Off-white color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a shadow */
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0 auto;
+        }
+
+        /* Logo styling */
+        .logo {
+            position: absolute;
+            top: 15%;
+            left: 5%; /* Adjust the left position as needed */
+            width: 100px; /* Increase the width of the logo as needed */
+            height: auto; /* Maintain the aspect ratio */
+        }
+
+        /* Text below the title */
+        .subtitle {
+            position: absolute;
+            bottom: 18%; /* Adjust the top position as needed */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* New text below the subtitle */
+        .additional-text {
+            position: absolute;
+            top: 17%; /* Adjust the top position as needed */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            color: #dadada;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <header class="feature-box below">
+        <!-- Your added logo -->
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo">
+        <!-- Your added heading -->
+        <h1 class="tcl-homepage-hero__heading tds-colorscheme--dark" style="--tcl-homepage-hero-heading-font-size-desktop:40px; --tcl-homepage-hero-heading-font-size-mobile:36px;">
+            Safety Siren
+        </h1>
+        <!-- Your added text -->
+        <p class="subtitle">
+            Our solution aims to significantly reduce the time it takes for security services to reach areas of nuisance.
+        </p>
+        <!-- New text -->
+        <h3 class="additional-text">
+            India's Smartest Emergency Response System
+        </h3>
+        <nav>
+            <ul class="centered">
+                <!-- First button with grey background -->
+                <li><a href="/FrontPage">Video</a></li>
+                <li><a href="/webcam">LiveWebcam</a></li>
+            </ul>
+        </nav>
+        <!-- Video Background -->
+        <video autoplay muted loop id="video-bg" class="video-background">
+            <source src="{{ url_for('static', filename='images/cctv.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </header>
+
+    <!-- Rest of your content -->
+
+    <footer>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Video</title>
+    <style>
+        body {
+            color: white;
+            margin: 0px;
+            padding: 0px;
+            position: relative;
+        }
+
+        /* Added CSS for the video background */
+        #video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Place the video behind everything else */
+            object-fit: cover;
+        }
+
+        /* Updated the background-color for .features and .col-sm to be transparent */
+        .features, section.col-sm {
+            background-color: transparent;
+            width: 900px;
+            height: 700px;
+            border-radius: 35px;
+            object-fit: contain;
+            margin: 20px;
+        }
+
+        img {
+            width: 900px;
+            height: 600px;
+            border-radius: 35px;
+            object-fit: contain;
+            margin: 40px;
+        }
+
+        .new {
+            color: black;
+            padding: 10px;
+            background-color: transparent; /* Removed green background */
+            margin: 0px;
+            margin-top: -10px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0; /* Center horizontally */
+            text-align: center; /* Center text horizontally */
+        }
+
+        .btnCustom {
+            background-color: transparent; /* Removed green background */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .custom-file-input {
+            background-color: rgba(70, 69, 69, 0.603);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            position: relative; /* Adjust the position if needed */
+            z-index: 2; /* Set a higher z-index to place it in front */
+        }
+
+        .custom-file-input:hover {
+            background-color: rgba(206, 206, 206, 0.65);
+            color: white;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column; /* Adjusted flex direction */
+            align-items: flex-end; /* Align to the right */
+            height: 100%;
+            justify-content: center; /* Center vertically */
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .form-container button {
+            margin-top: 10px; /* Added margin between buttons */
+        }
+
+        .back-button {
+            background-color: rgba(70, 69, 69, 0.603);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: rgba(206, 206, 206, 0.65);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<video autoplay muted loop id="video-bg" class="video-background">
+    <source src="{{ url_for('static', filename='images/UI3.mp4') }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<section class="col-sm">
+    <img src="{{ url_for('video') }}" alt="Upload video">
+</section>
+<section class="form-container">
+    <div class="new">
+        <form method='POST' enctype="multipart/form-data" style="align-content: center; text-align: center;">
+            {{form.hidden_tag()}}
+            <div class="button-container">
+                <label for="file" class="custom-file-input">
+                    Choose File
+                    <input type="file" name="file" id="file" style="display: none;">
+                </label>
+                <button type="submit" name="favorite" value="x" class="back-button">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
+</html>
